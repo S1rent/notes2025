@@ -1,11 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     
     return (
       <header className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div className="container-xxl">
-          <a className="navbar-brand fw-bold fs-4" href="#">
+        <Link className="navbar-brand fw-bold fs-4" to="/">
             <h1 style={{
                 backgroundColor: "#923cb5",
                 backgroundImage: "linear-gradient(147deg, #923cb5 0%, #000000 74%)",
@@ -13,7 +14,7 @@ const Header = () => {
                 WebkitTextFillColor: 'transparent',
                 fontWeight: 900
             }}>Philip Indra Prayitno</h1>
-          </a>
+        </Link>
   
           <button
             className="navbar-toggler"
@@ -30,10 +31,10 @@ const Header = () => {
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="#profile">Create</a>
+              <Link className="nav-link" to="/create">Create</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#profile">Archive</a>
+                <Link className="nav-link" to="/archive">Archive</Link>
               </li>
             </ul>
           </div>

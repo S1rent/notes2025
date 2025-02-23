@@ -4,10 +4,20 @@ import NoteCard from "./NoteCard";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const NoteList = ({ notes }) => {
+
+  if(notes?.length === 0)
+  {
+    return (
+      <div>
+        The list is empty, try to add some.
+      </div>
+    )
+  }
+
   return (
     <div className="container text-center d-flex flex-wrap gap-4 justify-content-center">
       {notes.map((note) => (
-        <NoteCard key={note.id} title={note.title} date={note.date} description={note.description} />
+        <NoteCard key={note.id} title={note.title} date={note.date} description={note.description} id={note.id} />
       ))}
     </div>
   );

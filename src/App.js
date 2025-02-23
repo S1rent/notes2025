@@ -7,6 +7,7 @@ import CreateNote from "./pages/CreateNote";
 import NoteDetail from "./pages/NoteDetail";
 import Footer from "./components/Footer";
 import { NoteProvider } from "./context/NoteContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/note/:name" element={<NoteDetail />} />
+        <Route path="/note/:noteId" element={<NoteDetail />} />
         <Route path="/archive" element={<Archive />} />
         <Route path="/create" element={<CreateNote />} />
       </Routes>

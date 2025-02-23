@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNotes } from "../context/NoteContext";
+import NoteList from "../components/NoteList";
+import SearchBar from "../components/SearchBar";
 
 const Archive = () => {
-  return <h1>Archive Page</h1>;
+  const { archivedNoteList } = useNotes();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredNotes = archivedNoteList.filter((note) =>
+    note.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  return (
+    <div className="p-4 d-flex flex-column align-items-center gap-4" style={{ marginTop: '5rem', textAlign: 'center', minHeight: 720 }}>
+      <h1 className="text-2xl font-bold text-black text-center">Catatan Arsip</h1>
+      <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
+      <NoteList notes={filteredNotes} />
+    </div>
+  );
 };
 
 export default Archive;
