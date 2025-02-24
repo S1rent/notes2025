@@ -10,17 +10,11 @@ const CreateNote = () => {
 
   const handleFormSubmit = (data) => {
     const newId = new Date().getTime()
-
     addNote({
       id: newId.toString(),
       title: data.title,
-      date: today.toLocaleDateString('en-GB', {
-        weekday: 'long',  
-        day: '2-digit',   
-        month: 'long',    
-        year: 'numeric'
-      }),
-      description: data.description,
+      createdAt: today.toISOString(),
+      body: data.description,
       archived: data?.isArchive
     })
 

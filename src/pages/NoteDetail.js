@@ -43,7 +43,7 @@ const NoteDetail = () => {
         key={note?.id}
         title={note?.title}
         date={note?.date}
-        description={note?.description}
+        description={note?.body}
         isDetail
       />
 

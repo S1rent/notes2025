@@ -3,13 +3,14 @@ import React, { createContext, useContext, useState } from "react";
 const NoteContext = createContext();
 
 const dummyNotes = [
-    { id: "1", title: "Babel", date: "Thursday 14 April 2022", description: "Babel merupakan tools open-source...", archived: false },
-    { id: "2", title: "Functional Component", date: "Thursday 14 April 2022", description: "Functional component merupakan...", archived: true },
-    { id: "3", title: "Modularization", date: "Thursday 14 April 2022", description: "Modularization merupakan teknik...", archived: false },
-    { id: "4", title: "ESM", date: "Thursday 14 April 2022", description: "ESM (ECMAScript Module) merupakan format modularisasi...", archived: false },
-    { id: "5", title: "Module Bundler", date: "Thursday 14 April 2022", description: "Module bundler merupakan tools yang digunakan...", archived: false },
-    { id: "6", title: "Lifecycle", date: "Thursday 14 April 2022", description: "Lifecycle merupakan kumpulan method yang menjadi siklus hidup...", archived: false },
+    { id: "1", title: "Babel", createdAt: "2022-04-14T04:27:34.572Z", body: "Babel merupakan tools open-source...", archived: false },
+    { id: "2", title: "Functional Component", createdAt: "2022-04-14T04:27:34.572Z", body: "Functional component merupakan...", archived: true },
+    { id: "3", title: "Modularization", createdAt: "2022-04-14T04:27:34.572Z", body: "Modularization merupakan teknik...", archived: false },
+    { id: "4", title: "ESM", createdAt: "2022-04-14T04:27:34.572Z", body: "ESM (ECMAScript Module) merupakan format modularisasi...", archived: false },
+    { id: "5", title: "Module Bundler", createdAt: "2022-04-14T04:27:34.572Z", body: "Module bundler merupakan tools yang digunakan...", archived: false },
+    { id: "6", title: "Lifecycle", createdAt: "2022-04-14T04:27:34.572Z", body: "Lifecycle merupakan kumpulan method yang menjadi siklus hidup...", archived: false },
   ];
+  
 
 export const useNotes = () => {
     return useContext(NoteContext);

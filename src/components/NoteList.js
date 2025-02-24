@@ -17,7 +17,7 @@ const NoteList = ({ notes }) => {
   return (
     <div className="container text-center d-flex flex-wrap gap-4 justify-content-center">
       {notes.map((note) => (
-        <NoteCard key={note.id} title={note.title} date={note.date} description={note.description} id={note.id} />
+        <NoteCard key={note.id} title={note.title} date={note.createdAt} description={note.body} id={note.id} />
       ))}
     </div>
   );
