@@ -4,10 +4,10 @@ import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
 
 const Archive = () => {
-  const { archivedNoteList } = useNotes();
+  const { noteList } = useNotes();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredNotes = archivedNoteList.filter((note) =>
+  const filteredNotes = noteList.filter(x => x.archived).filter((note) =>
     note.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
 

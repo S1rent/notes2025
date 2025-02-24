@@ -4,38 +4,25 @@ import { useNotes } from "../context/NoteContext";
 import { useNavigate } from 'react-router-dom';
 
 const CreateNote = () => {
-  const { addNote, addArchiveNote } = useNotes();
+  const { addNote } = useNotes();
   const today = new Date()
   const navigate = useNavigate();
 
   const handleFormSubmit = (data) => {
     const newId = new Date().getTime()
 
-    if (data?.isArchive) {
-      addArchiveNote({
-        id: newId.toString(),
-        title: data.title,
-        date: today.toLocaleDateString('en-GB', {
-          weekday: 'long',  
-          day: '2-digit',   
-          month: 'long',    
-          year: 'numeric'
-        }),
-        description: data.description
-      })
-    } else {
-      addNote({
-        id: newId.toString(),
-        title: data.title,
-        date: today.toLocaleDateString('en-GB', {
-          weekday: 'long',  
-          day: '2-digit',   
-          month: 'long',    
-          year: 'numeric'
-        }),
-        description: data.description
-      })
-    }
+    addNote({
+      id: newId.toString(),
+      title: data.title,
+      date: today.toLocaleDateString('en-GB', {
+        weekday: 'long',  
+        day: '2-digit',   
+        month: 'long',    
+        year: 'numeric'
+      }),
+      description: data.description,
+      archived: data?.isArchive
+    })
 
     navigate('/');
   };

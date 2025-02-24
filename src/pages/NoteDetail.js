@@ -16,7 +16,7 @@ const NoteDetail = () => {
     {
       const data = getNote(params.noteId)
       setNote(data)
-      setIsArchived(data?.isArchived ?? false)
+      setIsArchived(data?.archived ?? false)
     }
   }, [params.noteId])
 

@@ -9,7 +9,7 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredNotes = noteList.filter((note) =>
+  const filteredNotes = noteList.filter(x => !x.archived).filter((note) =>
     note.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
