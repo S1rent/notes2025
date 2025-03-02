@@ -9,6 +9,7 @@ const SearchBar = ({ searchTerm, onSearch }) => {
       placeholder="Cari berdasarkan judul..."
       value={searchTerm}
       onChange={(e) => onSearch(e.target.value)}
+      style={{ outline: 'none' }}
       className="w-50 p-2 border rounded-lg bg-gray-900 text-black card"
     />
   );

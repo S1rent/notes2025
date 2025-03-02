@@ -23,7 +23,7 @@ const NoteForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm">
+    <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
       <div className="mb-3">
         <label htmlFor="title" className="form-label fw-bolder">
           Title

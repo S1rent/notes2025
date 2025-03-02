@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.6",
+    "@mui/styled-engine-sc": "^6.4.6",
     "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
     "prop-types": "^15.8.1",
@@ -10,7 +14,8 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
-    "react-wavify": "^1.11.1"
+    "react-wavify": "^1.11.1",
+    "styled-components": "^6.1.15"
   },
   "scripts": {
     "start": "react-scripts start",

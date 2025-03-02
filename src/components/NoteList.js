@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import NoteCard from "./NoteCard";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ThemedContainer from "./ThemedContainer";
 
 const NoteList = ({ notes }) => {
 
@@ -15,11 +16,11 @@ const NoteList = ({ notes }) => {
   }
 
   return (
-    <div className="container text-center d-flex flex-wrap gap-4 justify-content-center">
+    <ThemedContainer style={{ display: 'flex', flexWrap: 'wrap' }}>
       {notes.map((note) => (
         <NoteCard key={note.id} title={note.title} date={note.createdAt} description={note.body} id={note.id} />
       ))}
-    </div>
+    </ThemedContainer>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNotes } from "../context/NoteContext";
 import { useNavigate, useParams } from "react-router-dom";
 import NoteCard from "../components/NoteCard";
+import { THEME_ENUM, useTheme } from "../context/ThemeContext";
 
 const NoteDetail = () => {
 
@@ -10,6 +11,8 @@ const NoteDetail = () => {
   const [note, setNote] = useState();
   const [isArchived, setIsArchived] = useState(false)
   const navigate = useNavigate();
+    const {getTheme} = useTheme();
+    const isDarkTheme = getTheme() === THEME_ENUM.dark
 
   useEffect(() => {
     if(params.noteId) 
@@ -37,8 +40,8 @@ const NoteDetail = () => {
   }
 
   return (
-    <div className="container text-center justify" style={{ marginTop: '5.1625rem', minHeight: 720 }}>
-      <h1 className="text-2xl font-bold text-black text-center my-5 pt-5">Note Detail</h1>
+    <div className="container text-center justify" style={{ paddingTop: '5.1625rem', minHeight: 780 }}>
+      <h1 className={`text-2xl font-bold ${isDarkTheme ? "text-white" :"text-black"} text-center my-5 pt-5`}>Note Detail</h1>
       <NoteCard
         key={note?.id}
         title={note?.title}
