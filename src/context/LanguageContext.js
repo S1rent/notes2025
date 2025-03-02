@@ -13,7 +13,7 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState(initialState);
+    const [language, setLanguage] = useState(localStorage.getItem('lang') ?? initialState);
 
     const getLanguage = () => {
         return language;
@@ -25,6 +25,7 @@ export const LanguageProvider = ({ children }) => {
             if(value === lang) {
                 isSuccess = true
                 setLanguage(lang)
+                localStorage.setItem('lang', lang);
             }
         });
         return isSuccess

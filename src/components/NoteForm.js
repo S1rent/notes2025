@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from '../utils/localization';
 
 const NoteForm = ({ onSubmit }) => {
+  const {getLanguage} = useLanguage();
+  const currentLang = getLanguage();
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -26,14 +31,14 @@ const NoteForm = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
       <div className="mb-3">
         <label htmlFor="title" className="form-label fw-bolder">
-          Title
+          {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.title, currentLang)}
         </label>
         <input
           type="text"
           className="form-control"
           id="title"
           name="title"
-          placeholder="Enter title"
+          placeholder={getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.enterTitle, currentLang)}
           value={formData.title}
           onChange={handleChange}
           required
@@ -42,14 +47,15 @@ const NoteForm = ({ onSubmit }) => {
 
       <div className="mb-3">
         <label htmlFor="description" className="form-label fw-bolder">
-          Description
+          
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.description, currentLang)}
         </label>
         <textarea
           className="form-control"
           id="description"
           name="description"
           rows="3"
-          placeholder="Enter description"
+          placeholder={getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.enterDescription, currentLang)}
           value={formData.description}
           onChange={handleChange}
           required
@@ -66,12 +72,14 @@ const NoteForm = ({ onSubmit }) => {
           onChange={handleChange}
         />
         <label className="form-check-label" htmlFor="isArchive">
-          Archive this note?
+          
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.archiveThisNote, currentLang)}
         </label>
       </div>
 
       <button type="submit" className="btn btn-primary w-100" style={{ background: '#923cb5', border: 'none' }}>
-        Save Note
+        
+      {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.saveNote, currentLang)}
       </button>
     </form>
   );

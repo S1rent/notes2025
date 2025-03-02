@@ -3,11 +3,16 @@ import NoteForm from "../components/NoteForm";
 import { useNotes } from "../context/NoteContext";
 import { useNavigate } from 'react-router-dom';
 import { THEME_ENUM, useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from "../utils/localization";
 
 const CreateNote = () => {
   const { addNote } = useNotes();
   const {getTheme} = useTheme();
   const isDarkTheme = getTheme() === THEME_ENUM.dark
+  const {getLanguage} = useLanguage();
+  const currentLang = getLanguage();
+
   const today = new Date()
   const navigate = useNavigate();
 
@@ -26,7 +31,7 @@ const CreateNote = () => {
 
   return (
     <div className="container" style={{ paddingTop: '5.5rem', minHeight: 800 }}>
-      <h1 className={`text-2xl font-bold ${isDarkTheme ? "text-white" : 'text-black'} my-5`}>Create a Note</h1>
+      <h1 className={`text-2xl font-bold ${isDarkTheme ? "text-white" : 'text-black'} my-5`}>{getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.createNote, currentLang)}</h1>
       <NoteForm onSubmit={handleFormSubmit} />
     </div>
     

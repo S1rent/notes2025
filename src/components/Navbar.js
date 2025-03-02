@@ -8,6 +8,7 @@ import {LANGUAGE_ENUM, useLanguage} from '../context/LanguageContext';
 import { THEME_ENUM, useTheme } from "../context/ThemeContext";
 import MoonIcon from "../assets/MoonIcon";
 import WhiteLanguageIcon from "../assets/WhiteLanguageIcon";
+import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from "../utils/localization";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,8 @@ const Header = () => {
 
   const currentTheme = getTheme()
   const isDarkTheme = currentTheme === THEME_ENUM.dark
+
+  const currentLang = getLanguage();
 
   return (
     <header className={`navbar navbar-expand-lg navbar-light ${isDarkTheme ? 'bg-black' : 'bg-white'} shadow-sm fixed-top`}>
@@ -85,12 +88,12 @@ const Header = () => {
             </li>
             <li className="nav-item">
               <Link className={`nav-link ${isDarkTheme ? "text-light" : "text-dark"}`} to="/create">
-                Create
+                {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.navBarCreate, currentLang)}
               </Link>
             </li>
             <li className="nav-item">
               <Link className={`nav-link ${isDarkTheme ? "text-light" : "text-dark"}`} to="/archive">
-                Archive
+                {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.navBarArchive, currentLang)}
               </Link>
             </li>
           </ul>

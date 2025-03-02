@@ -13,7 +13,7 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState(initialState);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') ?? initialState);
 
     const getTheme = () => {
         return theme;
@@ -25,6 +25,7 @@ export const ThemeProvider = ({ children }) => {
             if(value === newTheme) {
                 isSuccess = true
                 setTheme(newTheme)
+                localStorage.setItem('theme', newTheme);
             }
         });
         return isSuccess

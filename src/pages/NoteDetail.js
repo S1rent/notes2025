@@ -3,45 +3,58 @@ import { useNotes } from "../context/NoteContext";
 import { useNavigate, useParams } from "react-router-dom";
 import NoteCard from "../components/NoteCard";
 import { THEME_ENUM, useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from "../utils/localization";
 
 const NoteDetail = () => {
-
-  const params = useParams()
-  const { getNote, deleteNote, archiveNote, unarchiveNote }  = useNotes();
+  const params = useParams();
+  const { getNote, deleteNote, archiveNote, unarchiveNote } = useNotes();
   const [note, setNote] = useState();
-  const [isArchived, setIsArchived] = useState(false)
+  const [isArchived, setIsArchived] = useState(false);
   const navigate = useNavigate();
-    const {getTheme} = useTheme();
-    const isDarkTheme = getTheme() === THEME_ENUM.dark
+
+  const { getTheme } = useTheme();
+  const isDarkTheme = getTheme() === THEME_ENUM.dark;
+
+  const { getLanguage } = useLanguage();
+  const currentLang = getLanguage();
 
   useEffect(() => {
-    if(params.noteId) 
-    {
-      const data = getNote(params.noteId)
-      setNote(data)
-      setIsArchived(data?.archived ?? false)
+    if (params.noteId) {
+      const data = getNote(params.noteId);
+      setNote(data);
+      setIsArchived(data?.archived ?? false);
     }
-  }, [params.noteId])
+  }, [params.noteId]);
 
   const handleDelete = () => {
-    deleteNote(params.noteId)
+    deleteNote(params.noteId);
 
-    navigate(`/`)
-  }
+    navigate(`/`);
+  };
 
   const handleArchive = () => {
-    if(isArchived) {
-      unarchiveNote(params.noteId)
+    if (isArchived) {
+      unarchiveNote(params.noteId);
     } else {
-      archiveNote(params.noteId)
+      archiveNote(params.noteId);
     }
 
-    navigate(`/`)
-  }
+    navigate(`/`);
+  };
 
   return (
-    <div className="container text-center justify" style={{ paddingTop: '5.1625rem', minHeight: 780 }}>
-      <h1 className={`text-2xl font-bold ${isDarkTheme ? "text-white" :"text-black"} text-center my-5 pt-5`}>Note Detail</h1>
+    <div
+      className="container text-center justify"
+      style={{ paddingTop: "5.1625rem", minHeight: 780 }}
+    >
+      <h1
+        className={`text-2xl font-bold ${
+          isDarkTheme ? "text-white" : "text-black"
+        } text-center my-5 pt-5`}
+      >
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.noteDetail, currentLang)}
+      </h1>
       <NoteCard
         key={note?.id}
         title={note?.title}
@@ -50,11 +63,21 @@ const NoteDetail = () => {
         isDetail
       />
 
-      <button type="submit" className="btn btn-primary w-100 mt-5" style={{ background: '#923cb5', border: 'none' }} onClick={handleArchive}>
-        {isArchived ? "Un-Archive" : "Archive"}
+      <button
+        type="submit"
+        className="btn btn-primary w-100 mt-5"
+        style={{ background: "#923cb5", border: "none" }}
+        onClick={handleArchive}
+      >
+        {isArchived ? getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.unArchive, currentLang) : getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.navBarArchive, currentLang) }
       </button>
-      <button type="submit" className="btn btn-primary w-100 mt-2" style={{ background: 'red', border: 'none' }} onClick={handleDelete}>
-        Delete
+      <button
+        type="submit"
+        className="btn btn-primary w-100 mt-2"
+        style={{ background: "red", border: "none" }}
+        onClick={handleDelete}
+      >
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.delete, currentLang)}
       </button>
     </div>
   );

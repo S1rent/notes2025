@@ -3,12 +3,17 @@ import { useNotes } from "../context/NoteContext";
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
 import { THEME_ENUM, useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
+import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from "../utils/localization";
 
 const Archive = () => {
   const { noteList } = useNotes();
   const [searchTerm, setSearchTerm] = useState("");
+
   const { getTheme } = useTheme();
   const isDarkTheme = getTheme() === THEME_ENUM.dark;
+  const {getLanguage} = useLanguage();
+  const currentLang = getLanguage();
 
   const filteredNotes = noteList
     .filter((x) => x.archived)
@@ -26,7 +31,7 @@ const Archive = () => {
           isDarkTheme ? "text-white" : "text-black"
         } text-center`}
       >
-        Catatan Arsip
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.archivedNotes, currentLang)}
       </h1>
       <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
       <NoteList notes={filteredNotes} />
