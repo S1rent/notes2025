@@ -28,6 +28,7 @@ const ENGLISH_STRINGS = {
   error404: "Error 404",
   name: "Name",
   enterName: "Enter name",
+  logout: "Logout",
 };
 
 const INDONESIA_STRINGS = {
@@ -58,6 +59,7 @@ const INDONESIA_STRINGS = {
   error404: "Error 404",
   name: "Nama",
   enterName: "Masukkan nama",
+  logout: "Keluar",
 };
 
 export const LOCALIZATION_STRINGS_ENUM = {
@@ -78,6 +80,7 @@ export const LOCALIZATION_STRINGS_ENUM = {
   unArchive: "unArchive",
   register: "register",
   login: "login",
+  logout: "logout",
   email: "email",
   password: "password",
   didntHaveAccountYet: "didntHaveAccountYet",
