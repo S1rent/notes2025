@@ -26,6 +26,8 @@ const ENGLISH_STRINGS = {
   alreadyHaveAccount: "Already have account? Login here.",
   notFound: "Whoaa are you lost? we couldn't quite catch your request.",
   error404: "Error 404",
+  name: "Name",
+  enterName: "Enter name",
 };
 
 const INDONESIA_STRINGS = {
@@ -54,6 +56,8 @@ const INDONESIA_STRINGS = {
   alreadyHaveAccount: "Sudah punya akun? Masuk di sini.",
   notFound: "Whoaa apakah kamu tersesat? kami tidak bisa mencari permintaan anda.",
   error404: "Error 404",
+  name: "Nama",
+  enterName: "Masukkan nama",
 };
 
 export const LOCALIZATION_STRINGS_ENUM = {
@@ -82,6 +86,8 @@ export const LOCALIZATION_STRINGS_ENUM = {
   enterPassword: "enterPassword",
   notFound: "notFound",
   error404: "error404",
+  name: "name",
+  enterName: "enterName",
 };
 
 export const getLocalizedStrings = (keyword, language) => {

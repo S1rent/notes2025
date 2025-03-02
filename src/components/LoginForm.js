@@ -63,7 +63,7 @@ const LoginFormm = ({ onSubmit }) => {
       </div>
 
       <div className="text-center mb-5 fw-bold" >
-        <Link className="form-check-label" style={{ cursor: 'pointer', textDecoration: 'none', color: '#923cb5' }} to="/login">
+        <Link className="form-check-label" style={{ cursor: 'pointer', textDecoration: 'none', color: '#923cb5' }} to="/register">
           {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.didntHaveAccountYet, currentLang)}
         </Link>
       </div>

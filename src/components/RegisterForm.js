@@ -11,6 +11,7 @@ const RegisterForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    name: '',
   });
 
   const handleChange = (e) => {
@@ -24,11 +25,27 @@ const RegisterForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    setFormData({ email: '', password: '', isArchive: false });
+    setFormData({ name: '', email: '', password: '', isArchive: false });
   };
 
   return (
     <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
+    <div className="mb-3">
+      <label htmlFor="name" className="form-label fw-bolder">
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.name, currentLang)}
+      </label>
+      <input
+        type="name"
+        className="form-control"
+        id="name"
+        name="name"
+        placeholder={getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.enterName, currentLang)}
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
+    </div>
+
       <div className="mb-3">
         <label htmlFor="email" className="form-label fw-bolder">
           {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.email, currentLang)}

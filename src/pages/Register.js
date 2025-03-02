@@ -4,22 +4,25 @@ import { THEME_ENUM, useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from "../utils/localization";
 import RegisterForm from "../components/RegisterForm";
+import {register} from "../utils/network-data";
+import { useLoading } from "../context/LoadingContext";
 
 const Register = () => {
+  const {setLoading} = useLoading();
+
   const {getTheme} = useTheme();
   const isDarkTheme = getTheme() === THEME_ENUM.dark
 
   const {getLanguage} = useLanguage();
   const currentLang = getLanguage();
 
-  const today = new Date()
   const navigate = useNavigate();
 
-  const handleFormSubmit = (data) => {
-    const newId = new Date().getTime()
-
-    navigate('/');
-  };
+  const handleFormSubmit = async (data) => {
+    setLoading(true)
+    await register(data)
+    setLoading(false)
+  };  
 
   return (
     <div className="container" style={{ paddingTop: '5.5rem', minHeight: 800 }}>
