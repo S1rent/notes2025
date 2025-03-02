@@ -15,7 +15,17 @@ const ENGLISH_STRINGS = {
   archivedNotes: "Archived Notes",
   delete: "Delete",
   noteDetail: "Note Detail",
-  unArchive: "Un-Archive"
+  unArchive: "Un-Archive",
+  register: "Register",
+  login: "Login",
+  email: "Email",
+  password: "Password",
+  didntHaveAccountYet: "Didn't have account yet? Register here.",
+  enterEmail: "Enter email",
+  enterPassword: "Enter password",
+  alreadyHaveAccount: "Already have account? Login here.",
+  notFound: "Whoaa are you lost? we couldn't quite catch your request.",
+  error404: "Error 404",
 };
 
 const INDONESIA_STRINGS = {
@@ -33,7 +43,17 @@ const INDONESIA_STRINGS = {
   archivedNotes: "Catatan Arsip",
   delete: "Hapus",
   noteDetail: "Detail Catatan",
-  unArchive: "Batalkan Arsip"
+  unArchive: "Batalkan Arsip",
+  register: "Daftar",
+  login: "Masuk",
+  email: "Email",
+  password: "Kata Sandi",
+  didntHaveAccountYet: "Belum punya akun? Daftar di sini.",
+  enterEmail: "Masukkan email",
+  enterPassword: "Masukkan kata sandi",
+  alreadyHaveAccount: "Sudah punya akun? Masuk di sini.",
+  notFound: "Whoaa apakah kamu tersesat? kami tidak bisa mencari permintaan anda.",
+  error404: "Error 404",
 };
 
 export const LOCALIZATION_STRINGS_ENUM = {
@@ -51,7 +71,17 @@ export const LOCALIZATION_STRINGS_ENUM = {
   archivedNotes: "archivedNotes",
   delete: "delete",
   noteDetail: "noteDetail",
-  unArchive: "unArchive"
+  unArchive: "unArchive",
+  register: "register",
+  login: "login",
+  email: "email",
+  password: "password",
+  didntHaveAccountYet: "didntHaveAccountYet",
+  alreadyHaveAccount: "alreadyHaveAccount",
+  enterEmail: "enterEmail",
+  enterPassword: "enterPassword",
+  notFound: "notFound",
+  error404: "error404",
 };
 
 export const getLocalizedStrings = (keyword, language) => {
