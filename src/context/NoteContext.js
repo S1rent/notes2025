@@ -17,10 +17,14 @@ export const useNotes = () => {
 };
 
 export const NoteProvider = ({ children }) => {
-    const [noteList, setNoteList] = useState(dummyNotes);
+    const [noteList, setNoteList] = useState([]);
 
     const addNote = (note) => {
         setNoteList([...noteList, note]);
+    };
+
+    const setNotes = (notes) => {
+        setNoteList([...notes]);
     };
 
     const deleteNote = (noteId) => {
@@ -47,7 +51,7 @@ export const NoteProvider = ({ children }) => {
     };
 
     return (
-        <NoteContext.Provider value={{ noteList, addNote, archiveNote, unarchiveNote, deleteNote, getNote }}>
+        <NoteContext.Provider value={{ noteList, addNote, archiveNote, unarchiveNote, deleteNote, getNote, setNotes }}>
             {children}
         </NoteContext.Provider>
     );
