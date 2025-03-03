@@ -13,12 +13,8 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const localSavedAuthToken = localStorage.getItem("accessToken");
-  const [auth, setAuth] = useState(
-    localSavedAuthToken
-      ? { ...initialState, accessToken: localSavedAuthToken }
-      : initialState
-  );
+  const localSavedAuthObject = localStorage.getItem("authObject");
+  const [auth, setAuth] = useState(JSON.parse(localSavedAuthObject) ?? initialState);
 
   const getAuth = () => {
     return auth;
@@ -26,6 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const setUserAuth = (newUserAuth) => {
     setAuth({ ...auth, ...newUserAuth });
+    localStorage.setItem('authObject', JSON.stringify({ ...auth, ...newUserAuth }));
   };
 
   return (

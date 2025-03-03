@@ -11,10 +11,13 @@ import {
 import { useSearchParams } from "react-router-dom";
 import { getArchivedNotes } from "../utils/network-data";
 import { useAuth } from "../context/AuthContext";
+import { useLoading } from "../context/LoadingContext";
+import ThemedContainer from "../components/ThemedContainer";
 
 const Archive = () => {
   const { noteList, setNotes } = useNotes();
   const [searchTerm, setSearchTerm] = useState("");
+  const {setLoading} = useLoading();
 
   const { getAuth } = useAuth();
   const authenticatedUser = getAuth();
@@ -47,18 +50,25 @@ const Archive = () => {
   }, []);
 
   const fetchActiveNotes = async () => {
+    setLoading(true)
     const response = await getArchivedNotes();
     setNotes(
       response.data.map((x) => {
         return { ...x, isArchived: true };
       })
     );
+    setLoading(false)
   };
 
   return (
-    <div
-      className="d-flex flex-column align-items-center gap-4"
-      style={{ paddingTop: "5.5rem", textAlign: "center", minHeight: 780 }}
+    <ThemedContainer
+      className="text-center d-flex align-items-center"
+      style={{
+        paddingTop: "5.5rem",
+        textAlign: "center",
+        minHeight: 780,
+        flexDirection: "column",
+      }}
     >
       <h1
         className={`text-2xl font-bold ${
@@ -72,7 +82,7 @@ const Archive = () => {
       </h1>
       <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
       <NoteList notes={filteredNotes} />
-    </div>
+    </ThemedContainer>
   );
 };
 

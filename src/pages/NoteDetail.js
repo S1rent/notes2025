@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useNotes } from "../context/NoteContext";
 import { useNavigate, useParams } from "react-router-dom";
 import NoteCard from "../components/NoteCard";
 import { THEME_ENUM, useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
-import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from "../utils/localization";
+import {
+  getLocalizedStrings,
+  LOCALIZATION_STRINGS_ENUM,
+} from "../utils/localization";
+import { archiveNote, getNote, unarchiveNote, deleteNote } from "../utils/network-data";
+import { useLoading } from "../context/LoadingContext";
+import { useSnackbar } from "../context/SnackbarContext";
+import { useAuth } from "../context/AuthContext";
 
 const NoteDetail = () => {
+  const {getAuth} = useAuth();
   const params = useParams();
-  const { getNote, deleteNote, archiveNote, unarchiveNote } = useNotes();
   const [note, setNote] = useState();
   const [isArchived, setIsArchived] = useState(false);
   const navigate = useNavigate();
+
+  const { setLoading } = useLoading();
 
   const { getTheme } = useTheme();
   const isDarkTheme = getTheme() === THEME_ENUM.dark;
@@ -19,27 +27,57 @@ const NoteDetail = () => {
   const { getLanguage } = useLanguage();
   const currentLang = getLanguage();
 
+  const {showSnackbar} = useSnackbar();
+
   useEffect(() => {
     if (params.noteId) {
-      const data = getNote(params.noteId);
-      setNote(data);
-      setIsArchived(data?.archived ?? false);
+      handleGetNote(params.noteId)
     }
   }, [params.noteId]);
 
-  const handleDelete = () => {
-    deleteNote(params.noteId);
+  const handleGetNote = async (noteId) =>{
+    setLoading(true)
 
+    const response = await getNote(noteId);
+
+    if(!response?.data?.owner || response?.data?.owner !== getAuth().id) {
+      navigate('/')
+      setLoading(false)
+      return
+    }
+
+    setNote(response.data);
+    setIsArchived(response?.data?.archived ?? false);
+
+    setLoading(false)
+  }
+
+  const handleDelete = async () => {
+    setLoading(true)
+    
+    const response = await deleteNote(params.noteId);
+    if(!response.error) {
+      showSnackbar("Successfully delete note.")
+    }
+
+    setLoading(false)
     navigate(`/`);
   };
 
-  const handleArchive = () => {
+  const handleArchive = async () => {
+    setLoading(true);
     if (isArchived) {
-      unarchiveNote(params.noteId);
+      const response = await unarchiveNote(params.noteId);
+      if(!response.error) {
+        showSnackbar("Successfully unarchive note.")
+      }
     } else {
-      archiveNote(params.noteId);
+      const response = await archiveNote(params.noteId);
+      if(!response.error) {
+        showSnackbar("Successfully archive note.")
+      }
     }
-
+    setLoading(false);
     navigate(`/`);
   };
 
@@ -69,7 +107,15 @@ const NoteDetail = () => {
         style={{ background: "#923cb5", border: "none" }}
         onClick={handleArchive}
       >
-        {isArchived ? getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.unArchive, currentLang) : getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.navBarArchive, currentLang) }
+        {isArchived
+          ? getLocalizedStrings(
+              LOCALIZATION_STRINGS_ENUM.unArchive,
+              currentLang
+            )
+          : getLocalizedStrings(
+              LOCALIZATION_STRINGS_ENUM.navBarArchive,
+              currentLang
+            )}
       </button>
       <button
         type="submit"

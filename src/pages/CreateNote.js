@@ -1,30 +1,34 @@
 import React from "react";
 import NoteForm from "../components/NoteForm";
-import { useNotes } from "../context/NoteContext";
 import { useNavigate } from 'react-router-dom';
 import { THEME_ENUM, useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from "../utils/localization";
+import { addNote } from "../utils/network-data";
+import { useLoading } from "../context/LoadingContext";
+import { useSnackbar } from "../context/SnackbarContext";
 
 const CreateNote = () => {
-  const { addNote } = useNotes();
+  const {showSnackbar} = useSnackbar();
+  const {setLoading} = useLoading();
   const {getTheme} = useTheme();
   const isDarkTheme = getTheme() === THEME_ENUM.dark
   const {getLanguage} = useLanguage();
   const currentLang = getLanguage();
 
-  const today = new Date()
   const navigate = useNavigate();
 
-  const handleFormSubmit = (data) => {
-    const newId = new Date().getTime()
-    addNote({
-      id: newId.toString(),
+  const handleFormSubmit = async (data) => {
+    setLoading(true)
+    const response = await addNote({
       title: data.title,
-      createdAt: today.toISOString(),
       body: data.description,
-      archived: data?.isArchive
     })
+    if(!response.error) {
+      showSnackbar("Successfully create note.")
+    }
+
+    setLoading(false)
 
     navigate('/');
   };

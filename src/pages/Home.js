@@ -11,12 +11,14 @@ import {
   getLocalizedStrings,
 } from "../utils/localization";
 import { useLanguage } from "../context/LanguageContext";
-import { getActiveNotes } from "../utils/network-data";
+import { getActiveNotes, getUserLogged } from "../utils/network-data";
+import { useLoading } from "../context/LoadingContext";
 
 const Home = () => {
   const { noteList, setNotes } = useNotes();
+  const {setLoading} = useLoading();
 
-  const { getAuth } = useAuth();
+  const { getAuth, setUserAuth } = useAuth();
   const authenticatedUser = getAuth();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -49,13 +51,29 @@ const Home = () => {
   }, []);
 
   const fetchActiveNotes = async () => {
+    setLoading(true)
     const response = await getActiveNotes();
     setNotes(
       response.data.map((x) => {
         return { ...x, isArchived: false };
       })
     );
-  };
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = async() => {
+    const result = await getUserLogged()
+    setUserAuth({
+      ...getAuth(), 
+      id: result?.data?.id ?? "",
+      name: result?.data?.name ?? "",
+      email: result?.data?.email ?? ""
+    })
+  }
 
   return (
     <ThemedContainer
@@ -63,7 +81,7 @@ const Home = () => {
       style={{
         paddingTop: "5.5rem",
         textAlign: "center",
-        minHeight: 720,
+        minHeight: 780,
         flexDirection: "column",
       }}
     >

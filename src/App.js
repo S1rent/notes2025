@@ -16,9 +16,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import AuthMiddleware from "./middleware/AuthMiddleware";
 import LoadingWrapper from "./middleware/LoadingWrapper";
+import SnackbarWrapper from "./components/SnackbarWrapper";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import { SnackbarProvider } from "./context/SnackbarContext";
 
 function App() {
   return (
@@ -28,23 +30,30 @@ function App() {
           <NoteProvider>
             <LanguageProvider>
               <AuthProvider>
-                <Router>
-                  <LoadingWrapper>
-                    <Navbar />
-                    <AuthMiddleware>
-                      <Routes>
-                        <Route path="*" element={<NotFound />} />
-                        <Route path="/" element={<Home />} />
-                        <Route path="/note/:noteId" element={<NoteDetail />} />
-                        <Route path="/archive" element={<Archive />} />
-                        <Route path="/create" element={<CreateNote />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                      </Routes>
-                    </AuthMiddleware>
-                    <Footer />
-                  </LoadingWrapper>
-                </Router>
+                <SnackbarProvider>
+                  <Router>
+                    <LoadingWrapper>
+                      <SnackbarWrapper>
+                        <Navbar />
+                        <AuthMiddleware>
+                          <Routes>
+                            <Route path="*" element={<NotFound />} />
+                            <Route path="/" element={<Home />} />
+                            <Route
+                              path="/note/:noteId"
+                              element={<NoteDetail />}
+                            />
+                            <Route path="/archive" element={<Archive />} />
+                            <Route path="/create" element={<CreateNote />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/login" element={<Login />} />
+                          </Routes>
+                        </AuthMiddleware>
+                        <Footer />
+                      </SnackbarWrapper>
+                    </LoadingWrapper>
+                  </Router>
+                </SnackbarProvider>
               </AuthProvider>
             </LanguageProvider>
           </NoteProvider>

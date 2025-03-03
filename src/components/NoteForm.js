@@ -62,7 +62,7 @@ const NoteForm = ({ onSubmit }) => {
         ></textarea>
       </div>
 
-      <div className="form-check form-switch mb-3">
+      {/* <div className="form-check form-switch mb-3">
         <input
           className="form-check-input"
           type="checkbox"
@@ -75,7 +75,7 @@ const NoteForm = ({ onSubmit }) => {
           
         {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.archiveThisNote, currentLang)}
         </label>
-      </div>
+      </div> */}
 
       <button type="submit" className="btn btn-primary w-100" style={{ background: '#923cb5', border: 'none' }}>
         
