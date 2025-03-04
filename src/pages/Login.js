@@ -15,7 +15,7 @@ const Login = () => {
   const isLoggedIn = (getAccessToken() ?? "").trim() !== "";
 
   const { setLoading } = useLoading();
-  const {setUserAuth, getAuth} = useAuth();
+  const { setUserAuth, getAuth } = useAuth();
 
   const { getTheme } = useTheme();
   const isDarkTheme = getTheme() === THEME_ENUM.dark;
@@ -29,9 +29,9 @@ const Login = () => {
     setLoading(true);
 
     const loginResponse = await login(data);
-    const accessToken = loginResponse.data.accessToken
+    const accessToken = loginResponse.data.accessToken;
     putAccessToken(accessToken);
-    setUserAuth({...getAuth(), accessToken: accessToken})
+    setUserAuth({ ...getAuth(), accessToken: accessToken });
     navigate("/");
 
     setLoading(false);

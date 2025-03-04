@@ -17,7 +17,7 @@ import ThemedContainer from "../components/ThemedContainer";
 const Archive = () => {
   const { noteList, setNotes } = useNotes();
   const [searchTerm, setSearchTerm] = useState("");
-  const {setLoading} = useLoading();
+  const { setLoading } = useLoading();
 
   const { getAuth } = useAuth();
   const authenticatedUser = getAuth();
@@ -50,14 +50,14 @@ const Archive = () => {
   }, []);
 
   const fetchActiveNotes = async () => {
-    setLoading(true)
+    setLoading(true);
     const response = await getArchivedNotes();
     setNotes(
       response.data.map((x) => {
         return { ...x, isArchived: true };
       })
     );
-    setLoading(false)
+    setLoading(false);
   };
 
   return (

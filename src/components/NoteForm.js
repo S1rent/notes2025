@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useLanguage } from '../context/LanguageContext';
-import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from '../utils/localization';
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useLanguage } from "../context/LanguageContext";
+import {
+  getLocalizedStrings,
+  LOCALIZATION_STRINGS_ENUM,
+} from "../utils/localization";
+import PropTypes from "prop-types";
 
 const NoteForm = ({ onSubmit }) => {
-  const {getLanguage} = useLanguage();
+  const { getLanguage } = useLanguage();
   const currentLang = getLanguage();
 
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     isArchive: false,
   });
 
@@ -17,18 +21,21 @@ const NoteForm = ({ onSubmit }) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    setFormData({ title: '', description: '', isArchive: false });
+    setFormData({ title: "", description: "", isArchive: false });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 border rounded shadow-sm bg-white"
+    >
       <div className="mb-3">
         <label htmlFor="title" className="form-label fw-bolder">
           {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.title, currentLang)}
@@ -38,7 +45,10 @@ const NoteForm = ({ onSubmit }) => {
           className="form-control"
           id="title"
           name="title"
-          placeholder={getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.enterTitle, currentLang)}
+          placeholder={getLocalizedStrings(
+            LOCALIZATION_STRINGS_ENUM.enterTitle,
+            currentLang
+          )}
           value={formData.title}
           onChange={handleChange}
           required
@@ -47,15 +57,20 @@ const NoteForm = ({ onSubmit }) => {
 
       <div className="mb-3">
         <label htmlFor="description" className="form-label fw-bolder">
-          
-        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.description, currentLang)}
+          {getLocalizedStrings(
+            LOCALIZATION_STRINGS_ENUM.description,
+            currentLang
+          )}
         </label>
         <textarea
           className="form-control"
           id="description"
           name="description"
           rows="3"
-          placeholder={getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.enterDescription, currentLang)}
+          placeholder={getLocalizedStrings(
+            LOCALIZATION_STRINGS_ENUM.enterDescription,
+            currentLang
+          )}
           value={formData.description}
           onChange={handleChange}
           required
@@ -77,12 +92,19 @@ const NoteForm = ({ onSubmit }) => {
         </label>
       </div> */}
 
-      <button type="submit" className="btn btn-primary w-100" style={{ background: '#923cb5', border: 'none' }}>
-        
-      {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.saveNote, currentLang)}
+      <button
+        type="submit"
+        className="btn btn-primary w-100"
+        style={{ background: "#923cb5", border: "none" }}
+      >
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.saveNote, currentLang)}
       </button>
     </form>
   );
+};
+
+NoteForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default NoteForm;

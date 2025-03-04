@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useLanguage } from '../context/LanguageContext';
-import { getLocalizedStrings, LOCALIZATION_STRINGS_ENUM } from '../utils/localization';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useLanguage } from "../context/LanguageContext";
+import {
+  getLocalizedStrings,
+  LOCALIZATION_STRINGS_ENUM,
+} from "../utils/localization";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const LoginFormm = ({ onSubmit }) => {
-  const {getLanguage} = useLanguage();
+const LoginForm = ({ onSubmit }) => {
+  const { getLanguage } = useLanguage();
   const currentLang = getLanguage();
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -24,11 +28,14 @@ const LoginFormm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    setFormData({ email: '', password: '', isArchive: false });
+    setFormData({ email: "", password: "", isArchive: false });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 border rounded shadow-sm bg-white"
+    >
       <div className="mb-3">
         <label htmlFor="email" className="form-label fw-bolder">
           {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.email, currentLang)}
@@ -38,7 +45,10 @@ const LoginFormm = ({ onSubmit }) => {
           className="form-control"
           id="email"
           name="email"
-          placeholder={getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.enterEmail, currentLang)}
+          placeholder={getLocalizedStrings(
+            LOCALIZATION_STRINGS_ENUM.enterEmail,
+            currentLang
+          )}
           value={formData.email}
           onChange={handleChange}
           required
@@ -47,33 +57,53 @@ const LoginFormm = ({ onSubmit }) => {
 
       <div className="mb-3">
         <label htmlFor="password" className="form-label fw-bolder">
-          
-        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.password, currentLang)}
+          {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.password, currentLang)}
         </label>
         <input
           className="form-control"
           id="password"
-          type='password'
+          type="password"
           name="password"
-          placeholder={getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.enterPassword, currentLang)}
+          placeholder={getLocalizedStrings(
+            LOCALIZATION_STRINGS_ENUM.enterPassword,
+            currentLang
+          )}
           value={formData.password}
           onChange={handleChange}
           required
         />
       </div>
 
-      <div className="text-center mb-5 fw-bold" >
-        <Link className="form-check-label" style={{ cursor: 'pointer', textDecoration: 'none', color: '#923cb5' }} to="/register">
-          {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.didntHaveAccountYet, currentLang)}
+      <div className="text-center mb-5 fw-bold">
+        <Link
+          className="form-check-label"
+          style={{
+            cursor: "pointer",
+            textDecoration: "none",
+            color: "#923cb5",
+          }}
+          to="/register"
+        >
+          {getLocalizedStrings(
+            LOCALIZATION_STRINGS_ENUM.didntHaveAccountYet,
+            currentLang
+          )}
         </Link>
       </div>
 
-      <button type="submit" className="btn btn-primary w-100" style={{ background: '#923cb5', border: 'none' }}>
-        
-      {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.login, currentLang)}
+      <button
+        type="submit"
+        className="btn btn-primary w-100"
+        style={{ background: "#923cb5", border: "none" }}
+      >
+        {getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.login, currentLang)}
       </button>
     </form>
   );
 };
 
-export default LoginFormm;
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+export default LoginForm;

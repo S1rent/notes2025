@@ -5,20 +5,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ThemedContainer from "./ThemedContainer";
 
 const NoteList = ({ notes }) => {
-
-  if(notes?.length === 0)
-  {
-    return (
-      <div>
-        The list is empty, try to add some.
-      </div>
-    )
+  if (notes?.length === 0) {
+    return <div>The list is empty, try to add some.</div>;
   }
 
   return (
-    <ThemedContainer style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <ThemedContainer style={{ display: "flex", flexWrap: "wrap" }}>
       {notes.map((note) => (
-        <NoteCard key={note.id} title={note.title} date={note.createdAt} description={note.body} id={note.id} />
+        <NoteCard
+          key={note.id}
+          title={note.title}
+          date={note.createdAt}
+          description={note.body}
+          id={note.id}
+        />
       ))}
     </ThemedContainer>
   );

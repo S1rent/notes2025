@@ -16,7 +16,7 @@ import { useLoading } from "../context/LoadingContext";
 
 const Home = () => {
   const { noteList, setNotes } = useNotes();
-  const {setLoading} = useLoading();
+  const { setLoading } = useLoading();
 
   const { getAuth, setUserAuth } = useAuth();
   const authenticatedUser = getAuth();
@@ -51,29 +51,29 @@ const Home = () => {
   }, []);
 
   const fetchActiveNotes = async () => {
-    setLoading(true)
+    setLoading(true);
     const response = await getActiveNotes();
     setNotes(
       response.data.map((x) => {
         return { ...x, isArchived: false };
       })
     );
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    getUserData()
-  }, [])
+    getUserData();
+  }, []);
 
-  const getUserData = async() => {
-    const result = await getUserLogged()
+  const getUserData = async () => {
+    const result = await getUserLogged();
     setUserAuth({
-      ...getAuth(), 
+      ...getAuth(),
       id: result?.data?.id ?? "",
       name: result?.data?.name ?? "",
-      email: result?.data?.email ?? ""
-    })
-  }
+      email: result?.data?.email ?? "",
+    });
+  };
 
   return (
     <ThemedContainer

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
@@ -14,7 +15,9 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const localSavedAuthObject = localStorage.getItem("authObject");
-  const [auth, setAuth] = useState(JSON.parse(localSavedAuthObject) ?? initialState);
+  const [auth, setAuth] = useState(
+    JSON.parse(localSavedAuthObject) ?? initialState
+  );
 
   const getAuth = () => {
     return auth;
@@ -22,7 +25,10 @@ export const AuthProvider = ({ children }) => {
 
   const setUserAuth = (newUserAuth) => {
     setAuth({ ...auth, ...newUserAuth });
-    localStorage.setItem('authObject', JSON.stringify({ ...auth, ...newUserAuth }));
+    localStorage.setItem(
+      "authObject",
+      JSON.stringify({ ...auth, ...newUserAuth })
+    );
   };
 
   return (
@@ -30,4 +36,8 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

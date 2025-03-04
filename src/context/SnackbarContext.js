@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { createContext, useContext, useState } from "react";
 
 const SnackbarContext = createContext();
@@ -28,4 +29,8 @@ export const SnackbarProvider = ({ children }) => {
       {children}
     </SnackbarContext.Provider>
   );
+};
+
+SnackbarProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

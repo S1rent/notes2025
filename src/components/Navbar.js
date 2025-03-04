@@ -31,9 +31,9 @@ const Header = () => {
   const currentLang = getLanguage();
 
   const handleLogout = () => {
-    setUserAuth({ accessToken: "" })
+    setUserAuth({ accessToken: "" });
     localStorage.removeItem("accessToken");
-  }
+  };
 
   return (
     <header
@@ -159,7 +159,15 @@ const Header = () => {
                 ) : (
                   <LogoutIcon width={32} height={32} />
                 )}
-                <h6 className={`m-0 ${isDarkTheme ? "text-white": "text-black"}`} style={{ paddingLeft: '0.5rem' }}>{getLocalizedStrings(LOCALIZATION_STRINGS_ENUM.logout, currentLang)}</h6>
+                <h6
+                  className={`m-0 ${isDarkTheme ? "text-white" : "text-black"}`}
+                  style={{ paddingLeft: "0.5rem" }}
+                >
+                  {getLocalizedStrings(
+                    LOCALIZATION_STRINGS_ENUM.logout,
+                    currentLang
+                  )}
+                </h6>
               </li>
             )}
           </ul>

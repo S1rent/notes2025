@@ -1,6 +1,7 @@
 import React from "react";
 import LoadingIcon from "../assets/LoadingIcon";
 import { useLoading } from "../context/LoadingContext";
+import PropTypes from "prop-types";
 
 const LoadingWrapper = ({ children }) => {
   const { isLoading } = useLoading();
@@ -24,6 +25,10 @@ const LoadingWrapper = ({ children }) => {
       </div>
     </div>
   );
+};
+
+LoadingWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default LoadingWrapper;

@@ -55,7 +55,8 @@ const INDONESIA_STRINGS = {
   enterEmail: "Masukkan email",
   enterPassword: "Masukkan kata sandi",
   alreadyHaveAccount: "Sudah punya akun? Masuk di sini.",
-  notFound: "Whoaa apakah kamu tersesat? kami tidak bisa mencari permintaan anda.",
+  notFound:
+    "Whoaa apakah kamu tersesat? kami tidak bisa mencari permintaan anda.",
   error404: "Error 404",
   name: "Nama",
   enterName: "Masukkan nama",

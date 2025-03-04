@@ -1,39 +1,46 @@
+import PropTypes from "prop-types";
 import React, { createContext, useContext, useState } from "react";
 
 const LanguageContext = createContext();
-const initialState = "EN"
+const initialState = "EN";
 
 export const LANGUAGE_ENUM = {
-    english: "EN",
-    indonesia: "ID"
-}
-  
+  english: "EN",
+  indonesia: "ID",
+};
+
 export const useLanguage = () => {
-    return useContext(LanguageContext);
+  return useContext(LanguageContext);
 };
 
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState(localStorage.getItem('lang') ?? initialState);
+  const [language, setLanguage] = useState(
+    localStorage.getItem("lang") ?? initialState
+  );
 
-    const getLanguage = () => {
-        return language;
-    };
+  const getLanguage = () => {
+    return language;
+  };
 
-    const changeLanguage = (lang) => {
-        let isSuccess = false
-        Object.entries(LANGUAGE_ENUM).forEach(([key, value]) => {
-            if(value === lang) {
-                isSuccess = true
-                setLanguage(lang)
-                localStorage.setItem('lang', lang);
-            }
-        });
-        return isSuccess
-    };
+  const changeLanguage = (lang) => {
+    let isSuccess = false;
+    Object.entries(LANGUAGE_ENUM).forEach(([key, value]) => {
+      if (value === lang) {
+        isSuccess = true;
+        setLanguage(lang);
+        localStorage.setItem("lang", lang);
+      }
+    });
+    return isSuccess;
+  };
 
-    return (
-        <LanguageContext.Provider value={{ getLanguage, changeLanguage }}>
-            {children}
-        </LanguageContext.Provider>
-    );
+  return (
+    <LanguageContext.Provider value={{ getLanguage, changeLanguage }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+LanguageProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

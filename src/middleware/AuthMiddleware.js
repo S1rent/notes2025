@@ -4,6 +4,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import { useAuth } from "../context/AuthContext";
 import { getUserLogged } from "../utils/network-data";
+import PropTypes from "prop-types";
 
 const AuthMiddleware = ({ children }) => {
   const { getAuth, setUserAuth } = useAuth();
@@ -31,6 +32,10 @@ const AuthMiddleware = ({ children }) => {
       <Route path="/register" element={<Register />} />
     </Routes>
   );
+};
+
+AuthMiddleware.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthMiddleware;

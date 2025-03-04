@@ -1,8 +1,9 @@
 import React from "react";
 import { Snackbar } from "@mui/material";
 import { useSnackbar } from "../context/SnackbarContext";
+import PropTypes from "prop-types";
 
-const ThemeWrapper = ({ children }) => {
+const SnackbarWrapper = ({ children }) => {
   const { hideSnackbar, snackbarValue } = useSnackbar();
   return (
     <div>
@@ -19,4 +20,8 @@ const ThemeWrapper = ({ children }) => {
   );
 };
 
-export default ThemeWrapper;
+SnackbarWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default SnackbarWrapper;

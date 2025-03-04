@@ -1,39 +1,46 @@
+import PropTypes from "prop-types";
 import React, { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext();
-const initialState = "LIGHT"
+const initialState = "LIGHT";
 
 export const THEME_ENUM = {
-    dark: "DARK",
-    light: "LIGHT"
-}
-  
+  dark: "DARK",
+  light: "LIGHT",
+};
+
 export const useTheme = () => {
-    return useContext(ThemeContext);
+  return useContext(ThemeContext);
 };
 
 export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState(localStorage.getItem('theme') ?? initialState);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ?? initialState
+  );
 
-    const getTheme = () => {
-        return theme;
-    };
+  const getTheme = () => {
+    return theme;
+  };
 
-    const changeTheme = (newTheme) => {
-        let isSuccess = false
-        Object.entries(THEME_ENUM).forEach(([key, value]) => {
-            if(value === newTheme) {
-                isSuccess = true
-                setTheme(newTheme)
-                localStorage.setItem('theme', newTheme);
-            }
-        });
-        return isSuccess
-    };
+  const changeTheme = (newTheme) => {
+    let isSuccess = false;
+    Object.entries(THEME_ENUM).forEach(([key, value]) => {
+      if (value === newTheme) {
+        isSuccess = true;
+        setTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+      }
+    });
+    return isSuccess;
+  };
 
-    return (
-        <ThemeContext.Provider value={{ getTheme, changeTheme }}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={{ getTheme, changeTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
